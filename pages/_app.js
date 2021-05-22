@@ -3,7 +3,17 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-const theme = {};
+import { createMuiTheme } from "@material-ui/core";
+
+const theme = createMuiTheme({
+  spacing: 4,
+  palette: {
+    primary: {
+      main: "#007bff",
+    },
+  }
+});
+
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }) {
