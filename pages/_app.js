@@ -2,8 +2,11 @@ import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
+import LoadingProvider from "contexts/LoadingContext";
 
-const theme = {};
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }) {
@@ -20,7 +23,9 @@ function MyApp({ Component, pageProps }) {
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
+          <LoadingProvider>
+            <Component {...pageProps} />
+          </LoadingProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </>
