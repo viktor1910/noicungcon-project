@@ -1,9 +1,7 @@
-import SignIn from 'containers/auth'
+import SignIn from 'containers/auth';
 
 const signin = () => {
-    return (
-        <SignIn />
-    )
-}
+  return <SignIn />;
+};
 
-export default signin
+export default signin;
