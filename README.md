@@ -5,8 +5,9 @@ Link view staging: https://noicungcon-staging.netlify.app/
 # Folder structure
 - @type contain all style for typescript
 - api contain fetch api feature
-- components contain component need for page
+- components contain reuseable components
+- container contain logic or component use for pages
 - constants contain constants or enum
-- context contain context api need for page
-- hook contain custom hook
+- contexts contain context api need for page
+- hooks contain custom hook
 - utils content common function

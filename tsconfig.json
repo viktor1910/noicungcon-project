@@ -7,12 +7,6 @@
       "esnext"
     ],
     "baseUrl": "./src",
-    "paths": {
-      "./src": [
-        "src",
-        "@"
-      ]
-    },
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -23,7 +17,12 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": [
+      "node_modules/@types",
+      "src/types",
+      "src/components/types"
+    ],
   },
   "include": [
     "next-env.d.ts",
