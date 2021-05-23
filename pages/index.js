@@ -1,5 +1,6 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from 'next/head';
+import Image from 'next/image';
+import LayoutAdmin from 'src/layouts/LayoutAdmin.tsx';
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
         <meta name="description" content="Nói cùng con is loading" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>Page is loading...</div>
+      <LayoutAdmin>Page is loading...</LayoutAdmin>
     </>
-  )
+  );
 }
