@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import LoadingIndicator from 'components/LoadingIndicator';
+import LoadingIndicator from 'src/components/LoadingIndicator';
 
 interface LoadingContextData {
   showLoading: (open: boolean) => void;
