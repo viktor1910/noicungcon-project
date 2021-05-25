@@ -63,7 +63,8 @@ const handleValidate = () => {
       ),
     ConfirmPassword: Yup.string()
       .required('Required')
-      .test('Password-match', 'Password must match', function bar(value) {
+      // eslint-disable-next-line func-names
+      .test('Password-match', 'Password must match', function (value) {
         return this.parent.Password === value;
       }),
   });

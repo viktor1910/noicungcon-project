@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import {
   Avatar,
   Button,
@@ -12,9 +10,11 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
+import { useFormik } from 'formik';
 import { makeStyles } from '@material-ui/core/styles';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React from 'react';
+import * as Yup from 'yup';
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -36,8 +36,46 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+interface SignInForm {
+  email: string;
+  password: string;
+}
+
+const HandleValidate = () => {
+  Yup.object().shape({
+    email: Yup.string().email().required('Enter valid Email'),
+    password: Yup.string().required('Enter password'),
+  });
+};
+
 export default function SignIn() {
   const classes = useStyles();
+
+  const onHandleSignIn = (data: SignInForm, resetForm) => {
+    try {
+      console.log(data, 'data');
+      if (data) {
+        resetForm();
+      }
+    } catch (error) {
+      return error;
+    }
+    return 'test';
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit: (values: SignInForm, actions) => {
+      onHandleSignIn(values, actions.resetForm);
+      setTimeout(() => {
+        actions.setSubmitting(false);
+      }, 500);
+    },
+    validate: HandleValidate,
+  });
 
   return (
     <Container component="main" maxWidth="xs">
@@ -49,17 +87,25 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={formik.handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
-            required
             fullWidth
             id="email"
+            value={formik.values.email}
             label="Email Address"
             name="email"
             autoComplete="email"
+            helperText={
+              formik.errors.email && formik.touched.email
+                ? formik.errors.email
+                : 'Enter your email'
+            }
+            error={formik.errors.email && formik.touched.email}
             autoFocus
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           />
           <TextField
             variant="outlined"
@@ -67,9 +113,18 @@ export default function SignIn() {
             required
             fullWidth
             name="password"
+            value={formik.values.password}
             label="Password"
+            helperText={
+              formik.errors.password && formik.touched.password
+                ? formik.errors.password
+                : 'Enter your password'
+            }
+            error={formik.errors.password && formik.touched.password}
             type="password"
             id="password"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             autoComplete="current-password"
           />
           <FormControlLabel
@@ -87,11 +142,11 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link variant="body2">Forgot password?</Link>
+              {/* <Link variant="body2">Forgot password?</Link> */}
             </Grid>
             <Grid item>
               <Link href="/auth/register" variant="body2">
-                Don't have an account? Register
+                <p>Don&apos;t have an account? Register</p>
               </Link>
             </Grid>
           </Grid>
